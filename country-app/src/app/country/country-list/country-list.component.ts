@@ -99,7 +99,7 @@ export class CountryListComponent {
 
   get filteredCountry(): Country[] {
     return this.countries
-      .map((country, i) => ({ ...country }))
+      .map((country, i) => ({...country}))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 

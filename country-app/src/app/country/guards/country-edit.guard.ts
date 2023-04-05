@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanDeactivate } from '@angular/router';
+import { EditCountryComponent } from '../edit-country/edit-country.component';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
-export class CountryEditGuard implements CanActivate {
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
-  }
-  
+
+
+export class CountryEditGuard implements CanDeactivate<EditCountryComponent> {
+    canDeactivate(component: EditCountryComponent): boolean {
+        if (component.countryForm.dirty) {
+            const countryName = component.countryForm?.get('countryName')?.value;
+            return confirm(`Navigate away and lose all changes to ${countryName} record?`);
+        }
+        return true;
+
+    }
 }

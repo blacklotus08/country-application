@@ -41,10 +41,10 @@
               <td routerLink="/country-detail/{{country.country_name}}">{{country.country_name}}</td>
               <td routerLink="/country-detail/{{country.country_name}}">{{country.country_region}}</td>
               <td class="text-center">
-                <button class="btn btn-outline-primary btn-sm mx-2" routerLink="/edit-country/{{i + 1}}">
+                <button class="btn btn-outline-primary btn-sm mx-2" [routerLink]="['edit-country', country._id]">
                   Edit
                 </button>
-                <button class="btn btn-outline-danger btn-sm" (click)="deleteCountry(i + 1)">
+                <button class="btn btn-outline-danger btn-sm" (click)="deleteCountry(country._id)">
                   Delete
                 </button>
               </td>

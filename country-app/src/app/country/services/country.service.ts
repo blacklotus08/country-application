@@ -15,7 +15,7 @@ export class CountryService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'x-apikey' : '5d10446782ef885d6e621bc2',
+      'x-apikey' : '642d8c1239cf552ef728bff8',
       'Content-Type':  'application/json',
       Authorization: 'my-auth-token'
     })
@@ -30,7 +30,6 @@ export class CountryService {
 
 
   getCountryById(id: any): Observable<Country> {
-    console.log(id);
     return this.httpService.get<Country>(this.baseUrl + '/' + id, this.httpOptions)
       .pipe(
         tap(data => console.log('getCountry: ' + JSON.stringify(data))),
