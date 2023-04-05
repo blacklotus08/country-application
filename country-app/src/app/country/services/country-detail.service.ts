@@ -6,13 +6,13 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 })
 export class CountryDetailService {
   baseUrl = 'https://restcountries.com/v3.1/name/';
-  public countries: Array<any>[];
+  public countries = {};
 
   constructor(private httpService: HttpClient) { }
 
-  getCountryDetail(name) {
+  getCountryDetail(name: string) {
     this.httpService.get(this.baseUrl + name)
-      .subscribe((countries: Array<any>[]) => {
+      .subscribe((countries) => {
         this.countries = countries;
       },
       (err: HttpErrorResponse) => {
