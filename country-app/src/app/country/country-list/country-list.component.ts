@@ -52,9 +52,7 @@ export class CountryListComponent {
   ) { }
 
   performFilter(filterBy: string): Country[] {
-    console.log(this._regionFilter + 'Region Filter: ');
     filterBy = filterBy.toLocaleLowerCase();
-    console.log(filterBy + 'Filter');
 
     if (this._regionFilter == '') {
       return this.countries.filter((country: Country) =>
@@ -71,12 +69,10 @@ export class CountryListComponent {
   }
 
   performFilterbyRegion(filterBy: string): Country[] {
-    console.log(filterBy + 'Filter by Region');
     return this.countries.filter((country: Country) => country.country_region.indexOf(filterBy) !== -1);
   }
 
   onChange(deviceValue: any) {
-    console.log('Inside On Change: ' + deviceValue);
     this.countries = this.AllCountries;
     this.countries = deviceValue ? this.performFilterbyRegion(deviceValue) : this.countries;
     this.collectionSize = this.countries.length;

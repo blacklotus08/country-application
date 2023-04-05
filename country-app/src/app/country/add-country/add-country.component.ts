@@ -61,7 +61,6 @@ export class AddCountryComponent {
       country_name: this.countryForm?.get('countryName')?.value,
       country_region: this.countryForm?.get('countryRegion')?.value,
     };
-    console.log(JSON.stringify('Save Record:' + countries));
     this.countriesService.addCountry(countries);
     this.router.navigate(['/']);
     this.toastr.success('Record successfully added.', '',

@@ -17,9 +17,7 @@ export class CountryDetailService {
       },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
-            console.log('Client-side error occured.');
         } else {
-            console.log('Server-side error occured.');
             this.countries = [];
         }
     }

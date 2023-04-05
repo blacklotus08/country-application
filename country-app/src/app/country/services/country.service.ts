@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap, } from 'rxjs/operators';
+import { catchError, map, tap, } from 'rxjs/operators';
 
 import {Country} from '../models/country.model';
 
@@ -24,7 +24,7 @@ export class CountryService {
   constructor(private httpService: HttpClient) { }
   getCountry(): Observable<Country[]>  {
     return this.httpService.get<Country[]>(this.baseUrl, this.httpOptions).pipe(
-      tap(data => console.log('All: ' + JSON.stringify(data))), catchError(this.handleError)
+      catchError(this.handleError)
     );
   }
 
@@ -32,32 +32,27 @@ export class CountryService {
   getCountryById(id: any): Observable<Country> {
     return this.httpService.get<Country>(this.baseUrl + '/' + id, this.httpOptions)
       .pipe(
-        tap(data => console.log('getCountry: ' + JSON.stringify(data))),
         catchError(this.handleError)
       );
   }
 
 
   addCountry(countries: any) {
-    console.log('Country: ' + JSON.stringify(countries));
     this.httpService.post(this.baseUrl, countries, this.httpOptions).subscribe(countries);
-    console.log('Record successfully added.');
   }
 
   updateCountry(id: any, countries: any) {
     this.httpService.put(this.baseUrl + '/' + id, countries, this.httpOptions).subscribe(countries);
     this.getCountry();
-    console.log('Record successfully updated.');
   }
 
   deleteCountry(id :any, countries : any) {
     this.httpService.delete(this.baseUrl + '/' + id, this.httpOptions).subscribe(countries);
-    console.log('Record successfully deleted.');
   }
 
   CheckCode(id : any) {
     return this.httpService.get<Country[]>(this.baseUrl, this.httpOptions).pipe(
-      tap(data => console.log('Record Check Code:' + JSON.stringify(data))), catchError(this.handleError)
+      catchError(this.handleError)
     );
   }
 
