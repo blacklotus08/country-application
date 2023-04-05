@@ -9,7 +9,7 @@ import {Country} from '../models/country.model';
 @Injectable({
   providedIn: 'root'
 })
-export class CountriesService {
+export class CountryService {
 
   baseUrl = 'https://country-41d6.restdb.io/rest/country-header';
 
@@ -29,7 +29,7 @@ export class CountriesService {
   }
 
 
-  getCountryById(id): Observable<Country> {
+  getCountryById(id: any): Observable<Country> {
     console.log(id);
     return this.httpService.get<Country>(this.baseUrl + '/' + id, this.httpOptions)
       .pipe(
@@ -39,24 +39,24 @@ export class CountriesService {
   }
 
 
-  addCountry(countries) {
+  addCountry(countries: any) {
     console.log('Country: ' + JSON.stringify(countries));
     this.httpService.post(this.baseUrl, countries, this.httpOptions).subscribe(countries);
     console.log('Record successfully added.');
   }
 
-  updateCountry(id, countries) {
+  updateCountry(id: any, countries: any) {
     this.httpService.put(this.baseUrl + '/' + id, countries, this.httpOptions).subscribe(countries);
     this.getCountry();
     console.log('Record successfully updated.');
   }
 
-  deleteCountry(id, countries) {
+  deleteCountry(id :any, countries : any) {
     this.httpService.delete(this.baseUrl + '/' + id, this.httpOptions).subscribe(countries);
     console.log('Record successfully deleted.');
   }
 
-  CheckCode(id) {
+  CheckCode(id : any) {
     return this.httpService.get<Country[]>(this.baseUrl, this.httpOptions).pipe(
       tap(data => console.log('Record Check Code:' + JSON.stringify(data))), catchError(this.handleError)
     );

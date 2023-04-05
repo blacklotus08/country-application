@@ -1,1 +1,71 @@
-<p>country-list works!</p>
+<div class='card'>
+    <div class='card-header text-white bg-primary'>
+      List of Countries
+    </div>
+    <div class='card-body'>
+      <div class='row'>
+        <div class='col-md-1'>Search:</div>
+        <div class="input-group col-md">
+          <input type='text' [(ngModel)]='listFilter' />
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button" #reset (click)="resetFields()">Reset</button>
+          </div>
+        </div>
+  
+        <div class='col-md-2 offset-md-3'>
+          <select name="region" class="form-control" [(ngModel)]="regionFilter" (change)="onChange($event.target)">
+            <option value="" selected>All</option>
+            <option value="Africa">Africa</option>
+            <option value="Americas">Americas</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+            <option value="Oceania">Oceania</option>
+          </select>
+        </div>
+      </div>
+      <div class='table-responsive pt-2'>
+        <table class="table">
+          <thead class="table-bordered">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Code</th>
+              <th scope="col">Name</th>
+              <th scope="col">Region</th>
+              <th scope="col">Options</th>
+            </tr>
+          </thead>
+          <tbody class="table-bordered">
+            <tr *ngFor='let country of filteredCountry;let i = index' style="cursor: pointer;">
+              <td routerLink="/country-detail/{{country.country_name}}">{{i + 1}}</td>
+              <td routerLink="/country-detail/{{country.country_name}}">{{country.country_code}}</td>
+              <td routerLink="/country-detail/{{country.country_name}}">{{country.country_name}}</td>
+              <td routerLink="/country-detail/{{country.country_name}}">{{country.country_region}}</td>
+              <td class="text-center">
+                <button class="btn btn-outline-primary btn-sm mx-2" routerLink="/edit-country/{{i + 1}}">
+                  Edit
+                </button>
+                <button class="btn btn-outline-danger btn-sm" (click)="deleteCountry(i + 1)">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <div class="col-md-12 d-flex justify-content-between p-1">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"></ngb-pagination>
+  
+        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+          <option [ngValue]="5">5</option>
+          <option [ngValue]="10">10</option>
+          <option [ngValue]="15">15</option>
+          <option [ngValue]="20">20</option>
+        </select>
+      </div>
+  
+    </div>
+  </div>
+  <div *ngIf='errorMessage' class='alert alert-danger'>
+    Error: {{ errorMessage }}
+  </div>
