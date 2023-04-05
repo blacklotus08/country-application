@@ -1,1 +1,62 @@
-<p>add-country works!</p>
+<div class='card'>
+    <div class='card-header text-white bg-primary'>
+      Add Country
+    </div>
+    <div class='card-body'>
+      <form novalidate (ngSubmit)="save()" [formGroup]="countryForm">
+        <div class="form-group col-md-12 pt-1">
+          <label for="country_code">Country Code</label>
+            <input type="text" id="country_code" name="country_code" class="form-control" placeholder="Country Code"
+            formControlName="countryCode" [ngClass]="{'is-invalid': (countryForm.get('countryCode')?.touched ||
+            countryForm.get('countryCode')?.dirty) &&
+            !countryForm.get('countryCode')?.valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="countryForm.get('countryCode')?.errors?.['required']">
+              Please enter country code.
+            </span>
+          </span>
+          <span class="invalid-feedback">
+            <span *ngIf="countryForm.get('countryCode')?.errors?.['record_exist']">
+              Record provided already exist.
+            </span>
+          </span>
+  
+        </div>
+        <div class="form-group col-md-12">
+          <label for="country_name">Country Name</label>
+          <input type="text" required class="form-control" id="country_name" name="country_name"
+            placeholder="Country Name" formControlName="countryName" [ngClass]="{'is-invalid': (countryForm.get('countryName')?.touched ||
+            countryForm.get('countryName')?.dirty) &&
+            !countryForm.get('countryName')?.valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="countryForm.get('countryName')?.errors?. ['required']">
+              Please enter country name.
+            </span>
+          </span>
+        </div>
+        <div class="form-group col-md-12">
+          <label for="country_region">Region</label>
+          <select name="region" class="form-control" formControlName="countryRegion">
+            <option value="Africa">Africa</option>
+            <option value="Americas">Americas</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+            <option value="Oceania">Oceania</option>
+          </select>
+        </div>
+        <div class="row justify-content-md-center py-2">
+          <div class="col-md-auto">
+            <button type="submit" class="btn btn-primary mx-1"
+              [title]="countryForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+              [disabled]="!countryForm.valid">
+              Save
+            </button>
+            <button type="button" class="btn btn-secondary mx-1" (click)="goBack();">Cancel</button>
+            <button type="button" class="btn btn-primary mx-1" (click)="populateTestData()">
+              Test Data
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
